@@ -1465,7 +1465,7 @@ message NativeRequest {
   // The Ad unit ID of the native ad unit.
   // This corresponds to one of IAB Core-6 native ad units.
   // RECOMMENDED by OpenRTB Native 1.0; optional in 1.1, DEPRECATED in 1.2.
-  oneof ad_unit_oneof {
+  oneof adunit_oneof {
       AdUnitId adunit = 3;
       int32 adunit_extension = 16;
   }
@@ -1574,7 +1574,7 @@ message NativeRequest {
     message Image {
       // Type ID of the image element supported by the publisher.
       // The publisher can display this information in an appropriate format.
-      oneof image_asset_type_oneof {
+      oneof type_oneof {
           ImageAssetType type = 1;
           int32 type_extension = 7;
       }
@@ -1618,7 +1618,7 @@ message NativeRequest {
       // Type ID of the element supported by the publisher. The publisher can
       // display this information in an appropriate format.
       // REQUIRED by the OpenRTB Native specification.
-      oneof data_asset_type_oneof {
+      oneof type_oneof {
           DataAssetType type = 1;
           int32 type_extension = 3;
       }
@@ -1640,7 +1640,7 @@ message NativeRequest {
   message EventTrackers {
     // Type of event available for tracking.
     // REQUIRED by the OpenRTB Native specification.
-    oneof event_type_oneof {
+    oneof event_oneof {
         EventType event = 1;
         int32 event_extension = 3;
     }
@@ -1812,7 +1812,7 @@ message NativeResponse {
       // REQUIRED for assetsurl or dcourl responses,
       // not required to embedded asset responses.
       // Implemented in 1.2
-      oneof image_asset_type_oneof {
+      oneof type_oneof {
           ImageAssetType type = 4;
           int32 type_extension = 5;
       }
@@ -1846,7 +1846,7 @@ message NativeResponse {
       // The type of data element being submitted from the DataAssetTypes enum.
       // REQUIRED in 1.2 for assetsurl or dcourl responses.
       // Implemented in 1.2.
-      oneof data_asset_type_oneof {
+      oneof type_oneof {
           DataAssetType type = 3;
           int32 type_extension = 5;
       }
@@ -1892,7 +1892,7 @@ message NativeResponse {
   message EventTracker {
     // Type of event to track.
     // REQUIRED if embedded asset is being used.
-    oneof event_type_oneof {
+    oneof event_oneof {
         EventType event = 1;
         int32 event_extension = 4;
     }

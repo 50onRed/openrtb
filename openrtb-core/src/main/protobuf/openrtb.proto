@@ -1457,12 +1457,18 @@ message NativeRequest {
 
   // The Layout ID of the native ad unit.
   // RECOMMENDED by OpenRTB Native 1.0; optional in 1.1, DEPRECATED in 1.2.
-  optional LayoutId layout = 2;
+  oneof layout_oneof {
+      LayoutId layout = 2;
+      int32 layout_extension = 15;
+  }
 
   // The Ad unit ID of the native ad unit.
   // This corresponds to one of IAB Core-6 native ad units.
   // RECOMMENDED by OpenRTB Native 1.0; optional in 1.1, DEPRECATED in 1.2.
-  optional AdUnitId adunit = 3;
+  oneof ad_unit_oneof {
+      AdUnitId adunit = 3;
+      int32 adunit_extension = 16;
+  }
 
   // The context in which the ad appears.
   // RECOMMENDED in 1.2.
@@ -1568,7 +1574,10 @@ message NativeRequest {
     message Image {
       // Type ID of the image element supported by the publisher.
       // The publisher can display this information in an appropriate format.
-      optional ImageAssetType type = 1;
+      oneof image_asset_type_oneof {
+          ImageAssetType type = 1;
+          int32 type_extension = 7;
+      }
 
       // Width of the image in pixels.
       optional int32 w = 2;
@@ -1609,7 +1618,10 @@ message NativeRequest {
       // Type ID of the element supported by the publisher. The publisher can
       // display this information in an appropriate format.
       // REQUIRED by the OpenRTB Native specification.
-      required DataAssetType type = 1;
+      oneof data_asset_type_oneof {
+          DataAssetType type = 1;
+          int32 type_extension = 3;
+      }
 
       // Maximum length of the text in the element's response. Longer strings
       // may be truncated and ellipsized by Ad Exchange or the publisher during
@@ -1628,7 +1640,10 @@ message NativeRequest {
   message EventTrackers {
     // Type of event available for tracking.
     // REQUIRED by the OpenRTB Native specification.
-    required EventType event = 1;
+    oneof event_type_oneof {
+        EventType event = 1;
+        int32 event_extension = 3;
+    }
 
     // Array of types of tracking available for the given event.
     // REQUIRED by the OpenRTB Native specification.
@@ -1797,7 +1812,10 @@ message NativeResponse {
       // REQUIRED for assetsurl or dcourl responses,
       // not required to embedded asset responses.
       // Implemented in 1.2
-      optional ImageAssetType type = 4;
+      oneof image_asset_type_oneof {
+          ImageAssetType type = 4;
+          int32 type_extension = 5;
+      }
 
       // URL of the image asset.
       // REQUIRED by the OpenRTB Native specification.
@@ -1828,7 +1846,10 @@ message NativeResponse {
       // The type of data element being submitted from the DataAssetTypes enum.
       // REQUIRED in 1.2 for assetsurl or dcourl responses.
       // Implemented in 1.2.
-      optional DataAssetType type = 3;
+      oneof data_asset_type_oneof {
+          DataAssetType type = 3;
+          int32 type_extension = 5;
+      }
 
       // The length of the data element being submitted. Where applicable, must
       // comply with the recommended maximum lengths in the DataAssetType enum.
@@ -1871,7 +1892,10 @@ message NativeResponse {
   message EventTracker {
     // Type of event to track.
     // REQUIRED if embedded asset is being used.
-    optional EventType event = 1;
+    oneof event_type_oneof {
+        EventType event = 1;
+        int32 event_extension = 4;
+    }
 
     // Type of tracking requested.
     // REQUIRED if embedded asset is being used.
